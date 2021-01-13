@@ -1,0 +1,143 @@
+srawalji@ubuntu:~$ cd ~/Desktop
+srawalji@ubuntu:~/Desktop$ mdkir -p Calculator/{build,lib,src,test}
+
+Command 'mdkir' not found, did you mean:
+
+  command 'mkdir' from deb coreutils (8.30-3ubuntu2)
+  command 'mdir' from deb mtools (4.0.24-1)
+
+Try: sudo apt install <deb name>
+
+srawalji@ubuntu:~/Desktop$ mkdir -p Calculator/{build,lib,src,test}
+srawalji@ubuntu:~/Desktop$ cd Calculator/lib
+srawalji@ubuntu:~/Desktop/Calculator/lib$ git clone https://github.com/google/googletest.git -b release-1.10.0
+Cloning into 'googletest'...
+remote: Enumerating objects: 21656, done.
+remote: Total 21656 (delta 0), reused 0 (delta 0), pack-reused 21656
+Receiving objects: 100% (21656/21656), 8.17 MiB | 5.04 MiB/s, done.
+Resolving deltas: 100% (16034/16034), done.
+Note: switching to '703bd9caab50b139428cea1aaff9974ebee5742e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+srawalji@ubuntu:~/Desktop/Calculator/lib$ cd ..
+srawalji@ubuntu:~/Desktop/Calculator$ touch CMakeLists.txt
+srawalji@ubuntu:~/Desktop/Calculator$ cd src
+srawalji@ubuntu:~/Desktop/Calculator/src$ touch CMakeLists.txt
+srawalji@ubuntu:~/Desktop/Calculator/src$ cd ..
+srawalji@ubuntu:~/Desktop/Calculator$ cd test
+srawalji@ubuntu:~/Desktop/Calculator/test$ touch CMakeLists.txt
+srawalji@ubuntu:~/Desktop/Calculator/test$ cd ..
+srawalji@ubuntu:~/Desktop/Calculator$ cd src
+srawalji@ubuntu:~/Desktop/Calculator/src$ touch Calculator.h
+srawalji@ubuntu:~/Desktop/Calculator/src$ touch main.cpp
+srawalji@ubuntu:~/Desktop/Calculator/src$ touch Calculator.cpp
+srawalji@ubuntu:~/Desktop/Calculator/src$ cd ..
+srawalji@ubuntu:~/Desktop/Calculator$ cd test
+srawalji@ubuntu:~/Desktop/Calculator/test$ touch main.cpp
+srawalji@ubuntu:~/Desktop/Calculator/test$ touch Calculator-test.cpp
+srawalji@ubuntu:~/Desktop/Calculator/test$ cd ..
+srawalji@ubuntu:~/Desktop/Calculator$ cd build
+srawalji@ubuntu:~/Desktop/Calculator/build$ cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" 
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found PythonInterp: /usr/bin/python3.8 (found version "3.8.5") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/srawalji/Desktop/Calculator/build
+srawalji@ubuntu:~/Desktop/Calculator/build$ make all
+Scanning dependencies of target Calculator_lib
+[  5%] Building CXX object src/CMakeFiles/Calculator_lib.dir/Calculator.cpp.o
+[ 11%] Building CXX object src/CMakeFiles/Calculator_lib.dir/main.cpp.o
+[ 17%] Linking CXX static library libCalculator_lib.a
+[ 17%] Built target Calculator_lib
+Scanning dependencies of target Calculator_run
+[ 23%] Building CXX object src/CMakeFiles/Calculator_run.dir/Calculator.cpp.o
+[ 29%] Building CXX object src/CMakeFiles/Calculator_run.dir/main.cpp.o
+[ 35%] Linking CXX executable Calculator_run
+[ 35%] Built target Calculator_run
+Scanning dependencies of target gtest
+[ 41%] Building CXX object lib/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+[ 47%] Linking CXX static library ../../libgtestd.a
+[ 47%] Built target gtest
+Scanning dependencies of target Calculator_tst
+[ 52%] Building CXX object test/CMakeFiles/Calculator_tst.dir/Calculator-test.cpp.o
+[ 58%] Building CXX object test/CMakeFiles/Calculator_tst.dir/main.cpp.o
+[ 64%] Linking CXX executable Calculator_tst
+[ 64%] Built target Calculator_tst
+Scanning dependencies of target gmock
+[ 70%] Building CXX object lib/googletest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o
+[ 76%] Linking CXX static library ../../libgmockd.a
+[ 76%] Built target gmock
+Scanning dependencies of target gmock_main
+[ 82%] Building CXX object lib/googletest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
+[ 88%] Linking CXX static library ../../libgmock_maind.a
+[ 88%] Built target gmock_main
+Scanning dependencies of target gtest_main
+[ 94%] Building CXX object lib/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+[100%] Linking CXX static library ../../libgtest_maind.a
+[100%] Built target gtest_main
+srawalji@ubuntu:~/Desktop/Calculator/build$ ./src/Calculator_run
+Finding possibly products of 4 and 2
+Add: 6
+Sub: 2
+Mult: 8
+Div: 2
+srawalji@ubuntu:~/Desktop/Calculator/build$ .test/Calculator_tst
+bash: .test/Calculator_tst: No such file or directory
+srawalji@ubuntu:~/Desktop/Calculator/build$ .test/Calculator_test
+bash: .test/Calculator_test: No such file or directory
+srawalji@ubuntu:~/Desktop/Calculator/build$ find . -executable -type f
+./CMakeFiles/3.16.3/CMakeDetermineCompilerABI_C.bin
+./CMakeFiles/3.16.3/CMakeDetermineCompilerABI_CXX.bin
+./CMakeFiles/3.16.3/CompilerIdC/a.out
+./CMakeFiles/3.16.3/CompilerIdCXX/a.out
+./src/Calculator_run
+./test/Calculator_tst
+srawalji@ubuntu:~/Desktop/Calculator/build$ ./test/Calculator_tst
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CalculatorTest
+[ RUN      ] CalculatorTest.test1
+[       OK ] CalculatorTest.test1 (0 ms)
+[----------] 1 test from CalculatorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+srawalji@ubuntu:~/Desktop/Calculator/build$ 
+
